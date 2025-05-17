@@ -4,10 +4,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Desktopowe_AvaloniaUI_Aplikacja_3_Travel_Planner.MainWindow"
-        Title="Desktopowe_AvaloniaUI_Aplikacja_3_Travel_Planner">
-        
-        <Grid Margin="30" Background="Aqua" >
+        Title="Desktopowe_AvaloniaUI_Aplikacja_3_Travel_Planner"
+        Background="#BB9999">
+        <Grid Margin="20">
                 <Grid.RowDefinitions >
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -17,18 +19,56 @@
                         <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="9*"/>
                 </Grid.ColumnDefinitions>
                 
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="Imie"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Width="300"/>
+                <TextBlock Grid.Row="0" Grid.Column="0" 
+                           Text="Imie" 
+                           Margin="10 0 0 15"
+                           Name="JakisBlock"
+                           />
+                <TextBox Grid.Row="0" Grid.Column="1" 
+                         Width="300" 
+                         Margin="10 0 0 15" 
+                         Name="NameTextBox" 
+                         />
                 
-                <TextBlock Grid.Row="1" Grid.Column="0" Text="Nazwisko"/>
-                <TextBox Grid.Row="1" Grid.Column="1"/>
+                <TextBlock Grid.Row="1" Grid.Column="0"
+                           Text="Nazwisko"
+                           Margin="10 0 0 15"
+                           />
+                <TextBox Grid.Row="1" Grid.Column="1" 
+                         Margin="10 0 0 15" 
+                         Name="LastNameTextBox"
+                         />
                 
-                <TextBlock Grid.Row="2" Grid.Column="0" Text="Wybierz atrakcje do odwiedzenia"/>
-                <Grid Grid.Row="2" Grid.Column="1" >
+                <TextBlock Grid.Row="2" Grid.Column="0"
+                           Text="Wybierz państwo, które chcesz odwiedzić" 
+                           Margin="10 0 0 15"
+                           />
+                <ComboBox Grid.Row="2" Grid.Column="1"
+                          Name="countryComboBox"
+                          Width="200" 
+                          Margin="10 0 0 15"
+                          SelectionChanged="CountryComboBoxChanged"
+                          >
+                        <ComboBoxItem Content="Turcja" IsSelected="True"/>
+                        <ComboBoxItem Content="Wielka Brytania"/>
+                        <ComboBoxItem Content="Włochy"/>
+                        <ComboBoxItem Content="Portugalia"/>
+                        <ComboBoxItem Content="Norwegia"/>
+                        <ComboBoxItem Content="Japonia"  />
+                        <ComboBoxItem Content="Korea południowa"/>
+                </ComboBox>
+
+                
+                <TextBlock Grid.Row="3" Grid.Column="0"
+                           Text="Wybierz atrakcje do odwiedzenia"
+                           Margin="10 0 0 15"
+                           />
+                <Grid Grid.Row="3" Grid.Column="1" Margin="10 0 0 15">
                         <Grid.RowDefinitions >
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
@@ -40,16 +80,21 @@
                         <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <CheckBox Grid.Row="0" Content="Muzea"/>
-                        <CheckBox Grid.Row="1" Content="Parki Narodowe"/>
-                        <CheckBox Grid.Row="2" Content="Zabytki"/>
-                        <CheckBox Grid.Row="3" Content="Restauracje"/>
-                        <CheckBox Grid.Row="4" Content="Galerie sztuki"/>
-                        <CheckBox Grid.Row="5" Content="Festiwale i koncerty"/>
+                        <CheckBox Grid.Row="0" Content="Muzea" Name="MuseumsCheckBox"/>
+                        <CheckBox Grid.Row="1" Content="Parki Narodowe" Name="NationalParksCheckBox" />
+                        <CheckBox Grid.Row="2" Content="Zabytki" Name="MonumentsCheckBox"/>
+                        <CheckBox Grid.Row="3" Content="Restauracje" Name="RestaurantsCheckBox"/>
+                        <CheckBox Grid.Row="4" Content="Galerie sztuki" Name="ArtGalleriesCheckBox"/>
+                        <CheckBox Grid.Row="5" Content="Festiwale i koncerty" Name="FestivalsAndConcertsCheckBox"/>
                 </Grid>
                 
-                <TextBlock Grid.Row="3" Grid.Column="0" Text="Wybierz Srodek Transportu"/>
-                <Grid Grid.Row="3" Grid.Column="1" >
+                
+                <TextBlock Grid.Row="4" Grid.Column="0" 
+                           Text="Wybierz Srodek Transportu"
+                           Margin="10 0 0 15"
+                           />
+                <Grid Grid.Row="4" Grid.Column="1"
+                      Margin="10 0 0 15">
                         <Grid.RowDefinitions >
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
@@ -59,15 +104,51 @@
                         <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <RadioButton Grid.Row="0" Content="samolot" GroupName="VechicleRadioButton"/>
-                        <RadioButton Grid.Row="1" Content="samochochód" GroupName="VechicleRadioButton"/>
-                        <RadioButton Grid.Row="2" Content="pociąg" GroupName="VechicleRadioButton"/>
-                        <RadioButton Grid.Row="3" Content="statek" GroupName="VechicleRadioButton"/>
+                        <RadioButton Grid.Row="0" Content="samolot" GroupName="BrumBrumRadioButton" IsChecked="True" />
+                        <RadioButton Grid.Row="1" Content="samochochód" GroupName="BrumBrumRadioButton"/>
+                        <RadioButton Grid.Row="2" Content="pociąg" GroupName="BrumBrumRadioButton"/>
+                        <RadioButton Grid.Row="3" Content="statek" GroupName="BrumBrumRadioButton"/>
                 </Grid>
                 
-                <TextBlock Grid.Row="4" Grid.Column="0" Text="Lista miast do odwiedzenia"/>
-                <ListBox Grid.Row="4" Grid.Column="1" Background="Blue"/>
                 
-                <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"></Button>
+                <TextBlock Grid.Row="5" Grid.Column="0" 
+                           Text="Wpisz miasta ktore chcesz oddwiedzic "
+                           Width="300" 
+                           Margin="10 0 0 15" 
+                           />
+                <TextBox Grid.Row="5" Grid.Column="1"
+                         Width="300" 
+                         Margin="10 0 0 15" 
+                         Name="CityInputTextBox"
+                         KeyDown="CityInputOnKeyDown"
+                         />
+                
+                
+                <TextBlock Grid.Row="6" Grid.Column="0"
+                           Text="Lista miast do odwiedzenia"
+                           Margin="10 0 0 15" 
+                           />
+                <ListBox Grid.Row="6" Grid.Column="1"
+                         Background="Blue" 
+                         Margin="10 0 0 15"
+                         Name="CityListBox"
+                         />
+                
+                
+                <Button Grid.Row="7" Grid.Column="0"  
+                        Name="SubmitButton"
+                        Content="Podsumój swoja podroz"
+                        Margin="10 0 0 15" 
+                        Width="600" 
+                        HorizontalContentAlignment="Center"
+                        Click="TravelSummary"
+                        />
+                
+                
+                <Image Grid.Row="0" Grid.Column="2" Grid.RowSpan="8"
+                       Name="CountryImage"
+                       Stretch="Uniform" 
+                       Margin="30"
+                       />
         </Grid>
 </Window>
