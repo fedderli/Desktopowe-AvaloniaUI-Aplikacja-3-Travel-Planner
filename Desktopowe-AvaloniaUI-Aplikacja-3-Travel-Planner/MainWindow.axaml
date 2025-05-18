@@ -17,6 +17,8 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2*" />
@@ -104,7 +106,7 @@
                         <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <RadioButton Grid.Row="0" Content="samolot" GroupName="BrumBrumRadioButton" IsChecked="True" />
+                        <RadioButton Grid.Row="0" Content="salomot" GroupName="BrumBrumRadioButton" IsChecked="True" />
                         <RadioButton Grid.Row="1" Content="samochochód" GroupName="BrumBrumRadioButton"/>
                         <RadioButton Grid.Row="2" Content="pociąg" GroupName="BrumBrumRadioButton"/>
                         <RadioButton Grid.Row="3" Content="statek" GroupName="BrumBrumRadioButton"/>
@@ -135,7 +137,25 @@
                          />
                 
                 
-                <Button Grid.Row="7" Grid.Column="0"  
+                
+                <TextBlock Grid.Column="0" Grid.Row="7" Text="Wybierz datę rozpoczęcia podróży: " Margin="10"/>
+                <CalendarDatePicker Grid.Column="1" Grid.Row="7" x:Name="StartDatePicker"
+                                                   SelectedDateChanged="StartDatePicker_OnSelectedDateChanged" 
+                                                   Margin="10"
+                                                   Padding="10"
+                />
+                
+                <TextBlock Grid.Column="0" Grid.Row="8" Text="Wybierz datę rozpoczęcia podróży: " Margin="10"/>
+                <CalendarDatePicker Grid.Column="1" Grid.Row="8" x:Name="FinishDatePicker"
+                                    SelectedDateChanged="FinishDatePicker_OnSelectedDateChanged" 
+                                    Margin="10"
+                                    Padding="10"
+                />
+                
+                
+                
+                
+                <Button Grid.Row="9" Grid.Column="0"  
                         Name="SubmitButton"
                         Content="Podsumój swoja podroz"
                         Margin="10 0 0 15" 
@@ -143,6 +163,7 @@
                         HorizontalContentAlignment="Center"
                         Click="TravelSummary"
                         />
+                
                 
                 
                 <Image Grid.Row="0" Grid.Column="2" Grid.RowSpan="8"

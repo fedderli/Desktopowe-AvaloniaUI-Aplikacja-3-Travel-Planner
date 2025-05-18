@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Linq;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -13,6 +14,9 @@ public partial class MainWindow : Window
 {
     private string[] Cities = [];
     int attractionCount = 0;
+    private int price = 0;
+    string startDate = "";
+    string finishDate = "";
     public MainWindow()
     {
         InitializeComponent();
@@ -27,7 +31,34 @@ public partial class MainWindow : Window
         if (lastName.Trim() == "" ) lastName = "No last name";
         
         string comboBoxValue = (countryComboBox.SelectedItem as ComboBoxItem)?.Content?.ToString() ?? "No selection";
-        
+
+        switch (comboBoxValue)
+        {
+            case "Turcja":
+                price += 135;
+                break;
+            case "Wielka Brytania":
+                price += 212;
+                break;
+            case "Włochy":
+                price += 154;
+                break;
+            case "Portugalia":
+                price += 158;
+                break;
+            case "Norwegia":
+                price += 112;
+                break;
+            case "Japonia":
+                price += 832;
+                break;
+            case "Korea Południowa":
+                price += 789;
+                break;
+            default:
+                price += 0;
+                break;
+        }
         
         string museums = "";
         string nationalParks = "";
@@ -60,6 +91,25 @@ public partial class MainWindow : Window
         var RadioButtonValue = selectedRadioButton?.Content?.ToString() ?? "No selection"; 
          Console.WriteLine($"środek transportu: {RadioButtonValue}");
 
+        switch (RadioButtonValue)
+         {
+             case "salomot":
+                 price += 536;
+                 break;
+             case "samochochód":
+                 price += 100;
+                 break;
+             case "pociąg":
+                 price += 100;
+                 break;
+             case "statek":
+                 price += 100;
+                 break;
+             default:
+                 price += 0;
+                 break;
+         }
+
          
          
          
@@ -76,12 +126,19 @@ public partial class MainWindow : Window
                        $"Kraj: {comboBoxValue}\n" +
                        $"Atrakcje: {checkBoxy}\n" +
                        $"Środek transportu: {RadioButtonValue} \n" +
-                       $"Miasta do odwiedzenia: {listboxcontent}"; 
+                       $"Miasta do odwiedzenia: {listboxcontent} \n" +
+                       $"Cena: {price} \n" +
+                       $"Start Podrozy: {startDate} \n" +
+                       $"Koniec Podrozy: {finishDate}"; 
                       
+         var desktopPath = Environment.GetFolderPath((Environment.SpecialFolder.Desktop));
+         var filePath = Path.Combine(desktopPath, "Podsumowanie podróży.txt");
+         File.WriteAllText(filePath, content);
          
         var popupWindow = new TravelSummary(content);
         popupWindow.Show();
         attractionCount = 0;
+        price = 0;
     }
     
     public void CheckBoxHandler(CheckBox attractionValue, string atrakcje, ref string jakasAtrakcja)
@@ -90,6 +147,7 @@ public partial class MainWindow : Window
         {
             attractionCount++;
             jakasAtrakcja = atrakcje;
+            price += 100;
         }
     }
     
@@ -129,5 +187,19 @@ public partial class MainWindow : Window
             using var stream = AssetLoader.Open(uri);
             CountryImage.Source = new Bitmap(stream);
         }
+    }
+
+    private void StartDatePicker_OnSelectedDateChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        DateTime? selectedDate = StartDatePicker.SelectedDate;
+        string? onlyDate = selectedDate?.ToShortDateString();
+        startDate =  selectedDate.HasValue ? $"{onlyDate}" : $"Nie wybrano daty.";  
+    }
+
+    private void FinishDatePicker_OnSelectedDateChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        DateTime? selectedDate = FinishDatePicker.SelectedDate;
+        string? onlyDate = selectedDate?.ToShortDateString();
+        finishDate =  selectedDate.HasValue ? $"{onlyDate}" : $"Nie wybrano daty."; 
     }
 }
